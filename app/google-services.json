@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "799176862635",
+    "project_id": "tpoda1",
+    "storage_bucket": "tpoda1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799176862635:android:6a53aa9fc9608feeb580ee",
+        "android_client_info": {
+          "package_name": "com.example.gamedealsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC2TRNLo0Ksvgaf3ssi-ZUVqXVZ_4G9EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799176862635:android:48199c320157b90fb580ee",
+        "android_client_info": {
+          "package_name": "com.example.gamelootapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC2TRNLo0Ksvgaf3ssi-ZUVqXVZ_4G9EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799176862635:android:bdce2998ee204d4fb580ee",
+        "android_client_info": {
+          "package_name": "com.example.tpo_da1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC2TRNLo0Ksvgaf3ssi-ZUVqXVZ_4G9EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
