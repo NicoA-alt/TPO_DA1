@@ -12,7 +12,20 @@
           "package_name": "com.example.gamedealsapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "799176862635-f76ao8e7mirt7fujohf34a3lrt7i10nk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamedealsapp",
+            "certificate_hash": "a3b2d7b7c2fe10c4774c67d167fd027aec542952"
+          }
+        },
+        {
+          "client_id": "799176862635-5bi7ld0jgi9css395l91di9d1os0ec2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBC2TRNLo0Ksvgaf3ssi-ZUVqXVZ_4G9EM"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799176862635-5bi7ld0jgi9css395l91di9d1os0ec2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
@@ -31,7 +49,20 @@
           "package_name": "com.example.gamelootapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "799176862635-rp4dn92ssi4fe35enp01np8cthlgknu1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamelootapp",
+            "certificate_hash": "a3b2d7b7c2fe10c4774c67d167fd027aec542952"
+          }
+        },
+        {
+          "client_id": "799176862635-5bi7ld0jgi9css395l91di9d1os0ec2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBC2TRNLo0Ksvgaf3ssi-ZUVqXVZ_4G9EM"
@@ -39,7 +70,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799176862635-5bi7ld0jgi9css395l91di9d1os0ec2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },
@@ -50,7 +86,20 @@
           "package_name": "com.example.tpo_da1"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "799176862635-jbum81uigm8hdfvv9n4m7ulk4nvvhbv0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tpo_da1",
+            "certificate_hash": "a3b2d7b7c2fe10c4774c67d167fd027aec542952"
+          }
+        },
+        {
+          "client_id": "799176862635-5bi7ld0jgi9css395l91di9d1os0ec2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBC2TRNLo0Ksvgaf3ssi-ZUVqXVZ_4G9EM"
@@ -58,7 +107,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799176862635-5bi7ld0jgi9css395l91di9d1os0ec2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
