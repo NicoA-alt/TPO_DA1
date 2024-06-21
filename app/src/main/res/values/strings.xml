@@ -3,5 +3,9 @@
     <string name="login_with_google">Login with Google</string>
     <string name="default_web_client_id">799176862635-5bi7ld0jgi9css395l91di9d1os0ec2k.apps.googleusercontent.com</string>
     <string name="bienvenido_a_gamer_loot">Bienvenido a Gamer Loot</string>
-    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="inicio">Inicio</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="perfil">Perfil</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
 </resources>
