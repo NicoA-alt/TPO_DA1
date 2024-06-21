@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui
+package com.example.tpo_da1.ui.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

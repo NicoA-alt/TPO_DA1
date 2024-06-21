@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui
+package com.example.tpo_da1.ui.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tpo_da1.R
 import com.google.firebase.auth.FirebaseAuth
 import com.example.tpo_da1.databinding.FragmentPerfilBinding
 
