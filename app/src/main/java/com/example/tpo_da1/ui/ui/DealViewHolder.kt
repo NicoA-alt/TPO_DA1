@@ -10,9 +10,8 @@ class DealViewHolder(private val binding: ItemDealBinding) : RecyclerView.ViewHo
 
     fun bind(deal: Deal, clickListener: (Deal) -> Unit) {
         binding.title.text = deal.title
-        binding.normalPrice.text = "Normal Price: $${deal.normalPrice}"
-        binding.salePrice.text = "Sale Price: $${deal.salePrice}"
-        binding.stores.text = deal.storeName
+        binding.normalPrice.text = "$${deal.normalPrice}"
+        binding.salePrice.text = "$${deal.salePrice}"
 
         Glide.with(binding.root.context)
             .load(deal.thumb)

@@ -9,7 +9,7 @@
         android:icon="@drawable/favoritos"
         android:title="@string/favoritos" />
     <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/perfil"
-        android:title="@string/perfil" />
+        android:id="@+id/navigation_logout"
+        android:icon="@drawable/logout"
+        android:title="@string/cerrar_sesion" />
 </menu>

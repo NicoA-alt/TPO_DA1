@@ -42,6 +42,9 @@ class HomeFragment : Fragment() {
             }
             binding.recyclerProduct.adapter = dealsAdapter
         }
+        dealsViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -50,15 +53,10 @@ class HomeFragment : Fragment() {
     private fun groupDealsByTitle(deals: List<Deal>): List<Deal> {
         val groupedDeals = deals.groupBy { it.title }
         return groupedDeals.map { entry ->
-            val combinedDeal = entry.value.reduce { acc, deal ->
-                Deal(
-                    title = acc.title,
-                    normalPrice = acc.normalPrice,
-                    salePrice = acc.salePrice,
-                    thumb = acc.thumb,
-                    storeName = "${acc.storeName}, ${deal.storeName}"
-                )
-            }
+            val combinedDeal = entry.value.first().copy(
+                normalPrice = entry.value.maxOf { it.normalPrice },
+                salePrice = entry.value.minOf { it.salePrice }
+            )
             combinedDeal
         }
     }
