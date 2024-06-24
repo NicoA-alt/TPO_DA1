@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         val bottomNavigation: BottomNavigationView = binding.bottomNavigation
 
+        bottomNavigation.labelVisibilityMode = BottomNavigationView.LABEL_VISIBILITY_UNLABELED
+
         bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {

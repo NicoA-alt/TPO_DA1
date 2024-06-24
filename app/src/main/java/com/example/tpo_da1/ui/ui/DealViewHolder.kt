@@ -2,6 +2,7 @@ package com.example.tpo_da1.ui.ui
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.ItemDealBinding
 import com.example.tpo_da1.ui.domain.Deal
 import kotlin.math.roundToInt

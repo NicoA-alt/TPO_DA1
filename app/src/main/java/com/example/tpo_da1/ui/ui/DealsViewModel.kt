@@ -25,16 +25,28 @@ class DealsViewModel : ViewModel() {
 
     private val api = retrofit.create(CheapSharkApi::class.java)
 
+    var currentPage = 0
+    private var isLastPage = false
+    private val allDeals = mutableListOf<Deal>()
+    private val pageSize = 60
+
     init {
-        fetchDeals()
+        fetchDeals(currentPage)
     }
 
-    private fun fetchDeals() {
+    fun fetchDeals(page: Int) {
+        if (_loading.value == true || isLastPage) return
+
         _loading.value = true
-        api.getDeals().enqueue(object : Callback<List<Deal>> {
+        api.getDeals(page, pageSize).enqueue(object : Callback<List<Deal>> {
             override fun onResponse(call: Call<List<Deal>>, response: Response<List<Deal>>) {
                 if (response.isSuccessful) {
-                    _deals.value = response.body()
+                    val newDeals = response.body() ?: emptyList()
+                    if (newDeals.size < pageSize) {
+                        isLastPage = true
+                    }
+                    allDeals.addAll(newDeals)
+                    _deals.value = groupDealsByTitle(allDeals)
                 }
                 _loading.value = false
             }
@@ -46,7 +58,21 @@ class DealsViewModel : ViewModel() {
         })
     }
 
+    fun loadMoreDeals() {
+        fetchDeals(++currentPage)
+    }
 
+    private fun groupDealsByTitle(deals: List<Deal>): List<Deal> {
+        val groupedDeals = deals.groupBy { it.title }
+        return groupedDeals.map { entry ->
+            val combinedDeal = entry.value.first().copy(
+                normalPrice = entry.value.maxOf { it.normalPrice },
+                salePrice = entry.value.minOf { it.salePrice }
+            )
+            combinedDeal
+        }
+    }
+}
     /*
     private val _deals = MutableLiveData<List<Deal>>()
     val deals: LiveData<List<Deal>> get() = _deals
@@ -79,4 +105,3 @@ class DealsViewModel : ViewModel() {
     }
 
      */
-}
