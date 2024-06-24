@@ -102,6 +102,9 @@ class HomeFragment : Fragment() {
                 binding.noResultsLayout.visibility = View.GONE
                 binding.recyclerProduct.visibility = View.VISIBLE
                 dealsAdapter.setDeals(deals)
+                if (dealsViewModel.currentPage == 0) {
+                    binding.recyclerProduct.scrollToPosition(0)
+                }
             }
             dealsAdapter.showLoader(false)
             isLoading = false
@@ -110,6 +113,7 @@ class HomeFragment : Fragment() {
             binding.progressBar.visibility = if (isLoading && dealsViewModel.currentPage == 0) View.VISIBLE else View.GONE
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
