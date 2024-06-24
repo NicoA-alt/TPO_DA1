@@ -3,10 +3,12 @@ package com.example.tpo_da1.ui.ui
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +37,7 @@ class HomeFragment : Fragment() {
         dealsViewModel = ViewModelProvider(this).get(DealsViewModel::class.java)
 
         setupRecyclerView()
+        setupSearch()
         observeViewModel()
     }
 
@@ -61,6 +64,29 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setupSearch() {
+        binding.searchButton.setOnClickListener {
+            performSearch()
+        }
+
+        binding.searchEditText.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                performSearch()
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun performSearch() {
+        val query = binding.searchEditText.text.toString().trim()
+        if (query.isNotEmpty()) {
+            dealsViewModel.currentPage = 0
+            dealsViewModel.searchDeals(query)
+        }
+    }
+
     private fun loadMoreDealsWithDelay() {
         isLoading = true
         dealsAdapter.showLoader(true)
@@ -69,7 +95,14 @@ class HomeFragment : Fragment() {
 
     private fun observeViewModel() {
         dealsViewModel.deals.observe(viewLifecycleOwner) { deals ->
-            dealsAdapter.setDeals(deals)
+            if (deals.isEmpty()) {
+                binding.noResultsLayout.visibility = View.VISIBLE
+                binding.recyclerProduct.visibility = View.GONE
+            } else {
+                binding.noResultsLayout.visibility = View.GONE
+                binding.recyclerProduct.visibility = View.VISIBLE
+                dealsAdapter.setDeals(deals)
+            }
             dealsAdapter.showLoader(false)
             isLoading = false
         }

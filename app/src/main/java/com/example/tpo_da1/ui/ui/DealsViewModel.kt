@@ -18,6 +18,8 @@ class DealsViewModel : ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
+    private var searchQuery: String? = null
+
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://www.cheapshark.com/api/1.0/")
         .addConverterFactory(GsonConverterFactory.create())
@@ -59,7 +61,40 @@ class DealsViewModel : ViewModel() {
     }
 
     fun loadMoreDeals() {
-        fetchDeals(++currentPage)
+        if (searchQuery.isNullOrEmpty()) {
+            fetchDeals(++currentPage)
+        } else {
+            searchDeals(searchQuery!!, ++currentPage)
+        }
+    }
+
+    fun searchDeals(query: String, page: Int = 0) {
+        if (_loading.value == true) return
+
+        _loading.value = true
+        if (page == 0) {
+            searchQuery = query
+            allDeals.clear()
+        }
+
+        api.searchDeals(query, page).enqueue(object : Callback<List<Deal>> {
+            override fun onResponse(call: Call<List<Deal>>, response: Response<List<Deal>>) {
+                if (response.isSuccessful) {
+                    val searchResults = response.body() ?: emptyList()
+                    if (searchResults.size < pageSize) {
+                        isLastPage = true
+                    }
+                    allDeals.addAll(searchResults)
+                    _deals.value = groupDealsByTitle(allDeals)
+                }
+                _loading.value = false
+            }
+
+            override fun onFailure(call: Call<List<Deal>>, t: Throwable) {
+                _loading.value = false
+                // Manejar errores
+            }
+        })
     }
 
     private fun groupDealsByTitle(deals: List<Deal>): List<Deal> {

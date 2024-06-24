@@ -7,4 +7,6 @@
     <string name="favoritos">Favoritos</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cerrar_sesion">Cerrar Sesion</string>
+    <string name="no_results_text">No encontramos resultados para tu búsqueda. Por favor, intenta con otros términos.</string>
+    <string name="no_results_icon">Icono de no resultados</string>
 </resources>

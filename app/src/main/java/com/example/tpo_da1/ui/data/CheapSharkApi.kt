@@ -7,8 +7,8 @@ import retrofit2.http.Query
 
 interface CheapSharkApi {
     @GET("deals")
-    fun getDeals(
-        @Query("pageNumber") page: Int,
-        @Query("pageSize") pageSize: Int
-    ): Call<List<Deal>>
+    fun getDeals(@Query("pageNumber") pageNumber: Int, @Query("pageSize") pageSize: Int): Call<List<Deal>>
+
+    @GET("deals")
+    fun searchDeals(@Query("title") query: String, @Query("pageNumber") pageNumber: Int): Call<List<Deal>>
 }
