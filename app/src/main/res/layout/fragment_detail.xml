@@ -186,6 +186,15 @@
                 android:paddingTop="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/noStoresPlaceholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:visibility="gone"
+                android:text="¡No hay más tiendas que ofrecer en este momento, pero sigamos buscando la mejor oferta juntos!" />
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/otherStoresRecyclerView"
                 android:layout_width="match_parent"

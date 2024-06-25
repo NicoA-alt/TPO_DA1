@@ -5,14 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tpo_da1.ui.data.CheapSharkApi
+import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.CheapestPrice
 import com.example.tpo_da1.ui.domain.DealDetails
 import com.example.tpo_da1.ui.domain.DealDetailsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class DealDetailsViewModel : ViewModel() {
     private val _dealDetails = MutableLiveData<DealDetails?>()
@@ -24,12 +23,7 @@ class DealDetailsViewModel : ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://www.cheapshark.com/api/1.0/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val api = retrofit.create(CheapSharkApi::class.java)
+    private val api = RetrofitHelper.getRetrofit().create(CheapSharkApi::class.java)
 
     fun fetchDealDetails(dealID: String) {
         _loading.value = true

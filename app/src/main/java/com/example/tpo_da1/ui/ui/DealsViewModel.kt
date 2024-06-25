@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tpo_da1.ui.data.CheapSharkApi
+import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.Deal
 import com.example.tpo_da1.ui.domain.DealDetails
 import com.example.tpo_da1.ui.domain.DealDetailsResponse
@@ -24,12 +25,7 @@ class DealsViewModel : ViewModel() {
 
     private var searchQuery: String? = null
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://www.cheapshark.com/api/1.0/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val api = retrofit.create(CheapSharkApi::class.java)
+    private val api = RetrofitHelper.getRetrofit().create(CheapSharkApi::class.java)
 
     var currentPage = 0
     private var isLastPage = false
