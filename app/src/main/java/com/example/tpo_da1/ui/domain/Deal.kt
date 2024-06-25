@@ -4,5 +4,6 @@ data class Deal(
     val title: String,
     val normalPrice: String = "",
     val salePrice: String = "",
-    val thumb: String = ""
+    val thumb: String = "",
+    val dealID: String = ""
 )

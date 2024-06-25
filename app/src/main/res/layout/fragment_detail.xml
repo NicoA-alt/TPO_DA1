@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/dealImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:paddingTop="8dp"
+                android:text="Title" />
+
+            <TextView
+                android:id="@+id/steamRatingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calificación en Steam: "
+                android:paddingTop="8dp" />
+
+            <TextView
+                android:id="@+id/metacriticRatingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calificación en Metacritic: "
+                android:paddingTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/salePriceText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Precio de venta: "
+                    android:paddingTop="8dp" />
+
+                <TextView
+                    android:id="@+id/salePrice"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/normalPriceText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Precio original: "
+                    android:paddingTop="8dp" />
+
+                <TextView
+                    android:id="@+id/retailPrice"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lowestPriceText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Precio más bajo: "
+                    android:paddingTop="8dp" />
+
+                <TextView
+                    android:id="@+id/lowestPrice"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="16dp">
+
+                <Button
+                    android:id="@+id/buyButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Comprar" />
+
+                <Button
+                    android:id="@+id/favoriteButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Favorito" />
+
+                <Button
+                    android:id="@+id/infoButton"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Info" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/otherStoresTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Otras Tiendas"
+                android:paddingTop="16dp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/otherStoresRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

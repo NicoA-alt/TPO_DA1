@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -43,7 +44,16 @@ class HomeFragment : Fragment() {
 
     private fun setupRecyclerView() {
         dealsAdapter = DealsAdapter(mutableListOf()) { deal ->
-            // Click en oferta
+            val bundle = Bundle().apply {
+                putString("dealID", deal.dealID)
+            }
+            val detailFragment = DetailFragment().apply {
+                arguments = bundle
+            }
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container, detailFragment)
+                .addToBackStack(null)
+                .commit()
         }
         binding.recyclerProduct.apply {
             layoutManager = LinearLayoutManager(context)
