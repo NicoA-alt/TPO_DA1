@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.tpo_da1.ui.data.CheapSharkApi
+import com.example.tpo_da1.ui.domain.CheapestPrice
 import com.example.tpo_da1.ui.domain.DealDetails
 import com.example.tpo_da1.ui.domain.DealDetailsResponse
 import retrofit2.Call
@@ -16,6 +17,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class DealDetailsViewModel : ViewModel() {
     private val _dealDetails = MutableLiveData<DealDetails?>()
     val dealDetails: LiveData<DealDetails?> get() = _dealDetails
+
+    private val _cheapestPrice = MutableLiveData<CheapestPrice?>()
+    val cheapestPrice: LiveData<CheapestPrice?> get() = _cheapestPrice
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
@@ -36,9 +40,10 @@ class DealDetailsViewModel : ViewModel() {
             override fun onResponse(call: Call<DealDetailsResponse>, response: Response<DealDetailsResponse>) {
                 if (response.isSuccessful) {
                     _dealDetails.value = response.body()?.gameInfo
-                    Log.d("DealsViewModel", "Fetched deal details: ${_dealDetails.value}")
+                    _cheapestPrice.value = response.body()?.cheapestPrice
                 } else {
                     _dealDetails.value = null
+                    _cheapestPrice.value = null
                 }
                 _loading.value = false
             }
@@ -46,6 +51,7 @@ class DealDetailsViewModel : ViewModel() {
             override fun onFailure(call: Call<DealDetailsResponse>, t: Throwable) {
                 _loading.value = false
                 _dealDetails.value = null
+                _cheapestPrice.value = null
                 Log.e("DealsViewModel", "Failed to fetch deal details", t)
             }
         })
