@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -37,6 +38,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -51,6 +53,7 @@ dependencies {
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.0.2")
     implementation("com.google.android.gms:play-services-auth:20.1.0")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")

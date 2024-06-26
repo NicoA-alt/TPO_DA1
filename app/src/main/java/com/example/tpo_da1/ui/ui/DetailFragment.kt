@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.FragmentDetailBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 class DetailFragment : Fragment() {
 
@@ -19,6 +21,7 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var dealDetailsViewModel: DealDetailsViewModel
     private lateinit var dealID: String
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +76,7 @@ class DetailFragment : Fragment() {
                 binding.retailPrice.text = "N/A"
 
                 Glide.with(binding.root.context)
-                    .load(R.drawable.ic_launcher_background) // Usa una imagen de placeholder en caso de error
+                    .load(R.drawable.ic_launcher_background) //Placeholder
                     .into(binding.dealImage)
             }
         }
@@ -82,6 +85,7 @@ class DetailFragment : Fragment() {
             binding.lowestPriceText.text = "Precio más bajo: "
             binding.lowestPrice.text = "$${cheapestPrice?.price ?: "N/A"}"
         }
+
     }
 
     private fun setButtonListeners() {
@@ -102,8 +106,32 @@ class DetailFragment : Fragment() {
             }
             startActivity(intent)
         }
+        binding.favoriteButton.setOnClickListener {
+            saveFavorite()
+        }
     }
 
+    private fun saveFavorite() {
+        val deal = dealDetailsViewModel.dealDetails.value
+        deal?.let {
+            val dealMap = hashMapOf(
+                "title" to it.name,
+                "normalPrice" to it.retailPrice,
+                "salePrice" to it.salePrice,
+                "thumb" to it.thumb,
+                "dealID" to dealID
+            )
+
+            db.collection("favorites").document(dealID)
+                .set(dealMap)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Agregado a favoritos", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
