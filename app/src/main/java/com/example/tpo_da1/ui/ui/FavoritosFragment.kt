@@ -36,10 +36,17 @@ class FavoritosFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        favoriteAdapter = FavoriteAdapter(favoriteDeals) { deal ->
-            val intent = Intent(context, DetailFragment::class.java)
-            intent.putExtra("deal", deal)
-            startActivity(intent)
+        favoriteAdapter = FavoriteAdapter(favoriteDeals) { dealID ->
+            val bundle = Bundle().apply {
+                putString("dealID", dealID)
+            }
+            val detailFragment = DetailFragment().apply {
+                arguments = bundle
+            }
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container, detailFragment)
+                .addToBackStack(null)
+                .commit()
         }
         binding.favoritesRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -48,6 +55,7 @@ class FavoritosFragment : Fragment() {
     }
 
     private fun loadFavorites() {
+        binding.progressBar.visibility = View.VISIBLE
         db.collection("favorites")
             .get()
             .addOnSuccessListener { result ->
@@ -57,9 +65,21 @@ class FavoritosFragment : Fragment() {
                     favoriteDeals.add(deal)
                 }
                 favoriteAdapter.notifyDataSetChanged()
+                binding.progressBar.visibility = View.GONE
+
+                if (favoriteDeals.isEmpty()) {
+                    binding.noResultsLayout.visibility = View.VISIBLE
+                    binding.favoritesRecyclerView.visibility = View.GONE
+                } else {
+                    binding.noResultsLayout.visibility = View.GONE
+                    binding.favoritesRecyclerView.visibility = View.VISIBLE
+                }
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener { _ ->
                 // Error
+                binding.progressBar.visibility = View.GONE
+                binding.noResultsLayout.visibility = View.VISIBLE
+                binding.favoritesRecyclerView.visibility = View.GONE
             }
     }
 

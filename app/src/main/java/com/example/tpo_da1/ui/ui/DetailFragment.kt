@@ -22,6 +22,7 @@ class DetailFragment : Fragment() {
     private lateinit var dealDetailsViewModel: DealDetailsViewModel
     private lateinit var dealID: String
     private val db = FirebaseFirestore.getInstance()
+    private var isFavorite = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +42,7 @@ class DetailFragment : Fragment() {
 
         dealDetailsViewModel.fetchDealDetails(dealID)
         observeViewModel()
+        checkIfFavorite()
         setButtonListeners()
     }
 
@@ -85,14 +87,24 @@ class DetailFragment : Fragment() {
             binding.lowestPriceText.text = "Precio más bajo: "
             binding.lowestPrice.text = "$${cheapestPrice?.price ?: "N/A"}"
         }
+    }
 
+    private fun checkIfFavorite() {
+        db.collection("favorites").document(dealID)
+            .get()
+            .addOnSuccessListener { document ->
+                isFavorite = document.exists()
+                updateFavoriteButton()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun setButtonListeners() {
         binding.buyButton.setOnClickListener {
             val buyUrl = "https://www.cheapshark.com/redirect?dealID=$dealID"
             val intent = Intent(Intent.ACTION_VIEW).apply {
-                Log.d("DetailFragment", "Opening URL: $buyUrl")
                 data = Uri.parse(buyUrl)
             }
             startActivity(intent)
@@ -106,9 +118,20 @@ class DetailFragment : Fragment() {
             }
             startActivity(intent)
         }
+
         binding.favoriteButton.setOnClickListener {
+            toggleFavoriteStatus()
+        }
+    }
+
+    private fun toggleFavoriteStatus() {
+        if (isFavorite) {
+            removeFavorite()
+        } else {
             saveFavorite()
         }
+        isFavorite = !isFavorite
+        updateFavoriteButton()
     }
 
     private fun saveFavorite() {
@@ -132,6 +155,25 @@ class DetailFragment : Fragment() {
                 }
         }
     }
+
+    private fun removeFavorite() {
+        db.collection("favorites").document(dealID)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(context, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun updateFavoriteButton() {
+        if (_binding != null) {
+            val iconRes = if (isFavorite) R.drawable.ic_bookmark_active else R.drawable.ic_bookmark
+            binding.favoriteButton.setImageResource(iconRes)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

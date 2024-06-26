@@ -8,7 +8,49 @@
             android:id="@+id/favoritesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp" />
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp" />
+
+        <LinearLayout
+            android:id="@+id/noResultsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="16dp"
+            android:background="@color/fondo">
+
+            <ImageView
+                android:id="@+id/noResultsIcon"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/no_results"
+                android:contentDescription="@string/no_results_icon" />
+
+            <TextView
+                android:id="@+id/noResultsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No hay favoritos aún. ¡Añade algunos para verlos aquí!"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:padding="16dp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="#424242"
+            android:backgroundTint="@color/white"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primario"
+            android:visibility="gone"
+            android:layout_gravity="center" />
 
     </FrameLayout>
 </layout>

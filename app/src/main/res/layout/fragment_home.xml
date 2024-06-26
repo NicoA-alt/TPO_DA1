@@ -28,7 +28,7 @@
                 android:inputType="text"
                 android:backgroundTint="@color/textoPrimario"
                 android:textColor="@color/textoPrimario"
-                android:textColorHint="@color/textoSecundario"/>
+                android:textColorHint="@color/textoSecundario" />
 
             <ImageButton
                 android:id="@+id/searchButton"

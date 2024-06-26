@@ -10,7 +10,7 @@ import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.ItemFavoriteBinding
 import com.example.tpo_da1.ui.domain.Deal
 
-class FavoriteAdapter(private val deals: List<Deal>, private val clickListener: (Deal) -> Unit) : RecyclerView.Adapter<FavoriteViewHolder>() {
+class FavoriteAdapter(private val deals: List<Deal>, private val clickListener: (String) -> Unit) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val binding = ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,5 +22,4 @@ class FavoriteAdapter(private val deals: List<Deal>, private val clickListener: 
     }
 
     override fun getItemCount() = deals.size
-
 }

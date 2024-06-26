@@ -11,7 +11,7 @@ import com.example.tpo_da1.ui.domain.Deal
 import kotlin.math.roundToInt
 
 class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(deal: Deal, clickListener: (Deal) -> Unit) {
+    fun bind(deal: Deal, clickListener: (String) -> Unit) {
         binding.title.text = deal.title
         binding.normalPrice.text = "$${deal.normalPrice}"
         binding.salePrice.text = "$${deal.salePrice}"
@@ -25,6 +25,6 @@ class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerVie
         val discountPercentage = ((normalPrice - salePrice) / normalPrice * 100).roundToInt()
         binding.discountPercentage.text = "$discountPercentage%"
 
-        binding.root.setOnClickListener { clickListener(deal) }
+        binding.root.setOnClickListener { clickListener(deal.dealID) }
     }
 }
