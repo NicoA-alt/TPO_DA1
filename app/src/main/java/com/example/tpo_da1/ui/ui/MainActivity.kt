@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 
 class MainActivity : AppCompatActivity() {
     
@@ -21,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         setupBottomNavigation()
+        FirebaseApp.initializeApp(this)
+        val firestoreSettings = FirebaseFirestoreSettings.Builder()
+            .setPersistenceEnabled(true)
+            .build()
+        FirebaseFirestore.getInstance().firestoreSettings = firestoreSettings
     }
     private fun setupBottomNavigation() {
         val bottomNavigation: BottomNavigationView = binding.bottomNavigation
