@@ -4,48 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo"
     tools:context=".ui.ui.LoginActivity">
 
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/welcomeTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logo3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <TextView
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logoImageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="540dp"
-        android:layout_marginBottom="159dp"
         android:text="@string/bienvenido_a_gamer_loot"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/textoSecundario"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logoImageView" />
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/login_with_google"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/iniciar_sesion_con_google"
+        android:drawableLeft="@drawable/ic_google4"
+        android:backgroundTint="@color/boton"
+        android:textColor="@color/botonTexto"
+        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="30dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

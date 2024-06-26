@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/fondo">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,8 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center_vertical">
+            android:padding="4dp"
+            android:gravity="center_vertical"
+            android:background="@color/white">
 
             <EditText
                 android:id="@+id/searchEditText"
@@ -22,7 +25,10 @@
                 android:layout_weight="1"
                 android:padding="10dp"
                 android:imeOptions="actionSearch"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:backgroundTint="@color/textoPrimario"
+                android:textColor="@color/textoPrimario"
+                android:textColorHint="@color/textoSecundario"/>
 
             <ImageButton
                 android:id="@+id/searchButton"
@@ -31,7 +37,8 @@
                 android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
-                android:src="@drawable/busqueda1" />
+                android:src="@drawable/busqueda1"
+                app:tint="@color/primario" />
 
             <ImageButton
                 android:id="@+id/filterButton"
@@ -40,14 +47,17 @@
                 android:src="@drawable/filtro4"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_marginStart="8dp"
-                android:padding="8dp" />
+                android:padding="8dp"
+                app:tint="@color/primario" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp" />
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:background="@color/fondo"/>
 
         <LinearLayout
             android:id="@+id/noResultsLayout"
@@ -56,7 +66,8 @@
             android:orientation="vertical"
             android:gravity="center"
             android:visibility="gone"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:background="@color/fondo">
 
             <ImageView
                 android:id="@+id/noResultsIcon"
@@ -87,6 +98,6 @@
         android:background="#424242"
         android:backgroundTint="@color/white"
         android:indeterminate="true"
-        android:indeterminateTint="#148E19"
+        android:indeterminateTint="@color/primario"
         android:visibility="gone" />
 </FrameLayout>

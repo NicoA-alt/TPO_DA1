@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="primario">#4A148C</color>
+    <color name="primarioClaro">#7C43BD</color>
+    <color name="secundario">#BA5D00</color>
+    <color name="fondo">#FFFFFF</color>
+    <color name="textoPrimario">#000000</color>
+    <color name="textoSecundario">#757575</color>
+    <color name="boton">#E65100</color>
+    <color name="botonTexto">#FFFFFF</color>
     <color name="background_dark">#121212</color>
+    <color name="grey">#757575</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 </resources>
