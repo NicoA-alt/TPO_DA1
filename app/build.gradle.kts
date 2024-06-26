@@ -55,6 +55,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx:24.0.2")
     implementation("com.google.android.gms:play-services-auth:20.1.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.0")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
