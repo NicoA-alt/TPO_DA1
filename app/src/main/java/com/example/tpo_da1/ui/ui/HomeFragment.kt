@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         dealsViewModel = ViewModelProvider(this).get(DealsViewModel::class.java)
 
         setupRecyclerView()
@@ -123,7 +124,6 @@ class HomeFragment : Fragment() {
             binding.progressBar.visibility = if (isLoading && dealsViewModel.currentPage == 0) View.VISIBLE else View.GONE
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

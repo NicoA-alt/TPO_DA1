@@ -39,7 +39,6 @@ class DetailFragment : Fragment() {
         arguments?.let {
             dealID = it.getString("dealID").orEmpty()
         }
-
         dealDetailsViewModel.fetchDealDetails(dealID)
         observeViewModel()
         checkIfFavorite()
@@ -78,7 +77,7 @@ class DetailFragment : Fragment() {
                 binding.retailPrice.text = "N/A"
 
                 Glide.with(binding.root.context)
-                    .load(R.drawable.ic_launcher_background) //Placeholder
+                    .load(R.drawable.ic_launcher_background) // Placeholder
                     .into(binding.dealImage)
             }
         }

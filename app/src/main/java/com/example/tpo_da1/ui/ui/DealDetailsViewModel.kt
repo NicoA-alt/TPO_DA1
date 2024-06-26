@@ -1,14 +1,18 @@
 package com.example.tpo_da1.ui.ui
 
+import DealDetailsService
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.tpo_da1.ui.data.CheapSharkApi
+import com.example.tpo_da1.ui.data.DealDetailsRepository
 import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.CheapestPrice
 import com.example.tpo_da1.ui.domain.DealDetails
 import com.example.tpo_da1.ui.domain.DealDetailsResponse
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,31 +27,20 @@ class DealDetailsViewModel : ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
-    private val api = RetrofitHelper.getRetrofit().create(CheapSharkApi::class.java)
+    private val repository = DealDetailsRepository(DealDetailsService(RetrofitHelper.getCheapSharkApi()))
 
     fun fetchDealDetails(dealID: String) {
         _loading.value = true
-        Log.d("DealsViewModel", "Fetching deal details for deal ID: $dealID")
-        val call = api.getDealDetails("https://www.cheapshark.com/api/1.0/deals?id=$dealID")
-        Log.d("DealsViewModel", "Sent request to URL: ${call.request().url}")
-        call.enqueue(object : Callback<DealDetailsResponse> {
-            override fun onResponse(call: Call<DealDetailsResponse>, response: Response<DealDetailsResponse>) {
-                if (response.isSuccessful) {
-                    _dealDetails.value = response.body()?.gameInfo
-                    _cheapestPrice.value = response.body()?.cheapestPrice
-                } else {
-                    _dealDetails.value = null
-                    _cheapestPrice.value = null
-                }
-                _loading.value = false
-            }
-
-            override fun onFailure(call: Call<DealDetailsResponse>, t: Throwable) {
-                _loading.value = false
+        viewModelScope.launch {
+            try {
+                val response = repository.getDealDetails(dealID)
+                _dealDetails.value = response.gameInfo
+                _cheapestPrice.value = response.cheapestPrice
+            } catch (e: Exception) {
                 _dealDetails.value = null
                 _cheapestPrice.value = null
-                Log.e("DealsViewModel", "Failed to fetch deal details", t)
             }
-        })
+            _loading.value = false
+        }
     }
 }
