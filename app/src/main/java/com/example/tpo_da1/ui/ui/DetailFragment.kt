@@ -34,7 +34,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dealDetailsViewModel = ViewModelProvider(this).get(DealDetailsViewModel::class.java)
+        dealDetailsViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).get(DealDetailsViewModel::class.java)
 
         arguments?.let {
             dealID = it.getString("dealID").orEmpty()
@@ -48,6 +48,7 @@ class DetailFragment : Fragment() {
     private fun observeViewModel() {
         dealDetailsViewModel.dealDetails.observe(viewLifecycleOwner) { deal ->
             deal?.let {
+                Log.d("DetailFragment", "Deal details observed: $deal")
                 binding.title.text = it.name ?: "N/A"
                 binding.steamRatingLabel.text = "Calificación en Steam: "
                 binding.steamRatingText.text = "${it.steamRatingText ?: "N/A"} (${it.steamRatingPercent ?: "N/A"}%)"
@@ -64,6 +65,7 @@ class DetailFragment : Fragment() {
                     .load(it.thumb)
                     .into(binding.dealImage)
             } ?: run {
+                Log.d("DetailFragment", "Deal details are null")
                 binding.title.text = "N/A"
                 binding.steamRatingLabel.text = "Calificación en Steam: "
                 binding.steamRatingText.text = "N/A (N/A%)"

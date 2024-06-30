@@ -1,24 +1,15 @@
 package com.example.tpo_da1.ui.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tpo_da1.ui.data.CheapSharkApi
-import com.example.tpo_da1.ui.data.DealsRepository
-import com.example.tpo_da1.ui.data.DealsService
+import com.example.tpo_da1.ui.data.Deal.DealsRepository
+import com.example.tpo_da1.ui.data.Deal.DealsService
 import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.Deal
-import com.example.tpo_da1.ui.domain.DealDetails
-import com.example.tpo_da1.ui.domain.DealDetailsResponse
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URLDecoder
 
 class DealsViewModel : ViewModel() {
 

@@ -1,5 +1,4 @@
-package com.example.tpo_da1.ui.data
-
+package com.example.tpo_da1.ui.data.Deal
 import com.example.tpo_da1.ui.domain.Deal
 
 class DealsRepository(private val service: DealsService) {
