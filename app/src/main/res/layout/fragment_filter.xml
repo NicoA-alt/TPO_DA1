@@ -1,90 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/fondo">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tiendas"
-        android:textStyle="bold" />
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttons_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Spinner
-        android:id="@+id/spinnerStores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rango de precio: $0 - $50+"
-        android:textStyle="bold" />
+            <!-- Dropdown para selección de tienda -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seleccionar tienda"
+                android:textColor="@color/textoPrimario"
+                android:layout_marginBottom="8dp"/>
 
-    <SeekBar
-        android:id="@+id/seekBarPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="50" />
+            <Spinner
+                android:id="@+id/spinner_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/textViewPriceRange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="$0 - $50+" />
+            <!-- Slider para rango de precios -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rango de precios"
+                android:textColor="@color/textoPrimario"
+                android:layout_marginBottom="8dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ordenar por"
-        android:textStyle="bold" />
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/price_range_slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="0.0"
+                android:valueTo="50.0"
+                android:stepSize="5.0"
+                app:values="@array/initial_slider_values"
+                android:layout_marginBottom="8dp"/>
 
-    <Spinner
-        android:id="@+id/spinnerOrderBy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/price_range_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 - 50+"
+                android:textColor="@color/textoSecundario"
+                android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Orden"
-        android:textStyle="bold" />
+            <!-- Dropdown para criterios de ordenamiento -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ordenar por"
+                android:textColor="@color/textoPrimario"
+                android:layout_marginBottom="8dp"/>
 
-    <Spinner
-        android:id="@+id/spinnerOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/sort_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:entries="@array/sort_options"/>
 
-    <CheckBox
-        android:id="@+id/checkboxOnSale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="En oferta" />
+            <!-- Dropdown para orden ascendente o descendente -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orden"
+                android:textColor="@color/textoPrimario"
+                android:layout_marginBottom="8dp"/>
 
+            <Spinner
+                android:id="@+id/order_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:entries="@array/order_options"/>
+
+            <!-- Checkbox para ofertas disponibles -->
+            <CheckBox
+                android:id="@+id/checkbox_on_sale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En oferta"
+                android:textColor="@color/textoPrimario"
+                android:layout_marginBottom="16dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones en línea, anclados en la parte inferior -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/buttons_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
 
         <Button
-            android:id="@+id/buttonReset"
-            android:layout_width="wrap_content"
+            android:id="@+id/apply_filters_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Restablecer" />
+            android:layout_weight="1"
+            android:text="Aplicar filtros"
+            android:backgroundTint="@color/boton"
+            android:textColor="@color/botonTexto"
+            android:layout_marginEnd="8dp"/>
 
         <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="wrap_content"
+            android:id="@+id/reset_filters_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Cancelar" />
+            android:layout_weight="1"
+            android:text="Resetear filtros"
+            android:backgroundTint="@color/boton"
+            android:textColor="@color/botonTexto"
+            android:layout_marginStart="8dp"/>
 
-        <Button
-            android:id="@+id/buttonApply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aplicar" />
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.tpo_da1.ui.data
 
 import com.example.tpo_da1.ui.domain.Deal
 import com.example.tpo_da1.ui.domain.DealDetailsResponse
+import com.example.tpo_da1.ui.domain.Store
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,4 +17,6 @@ interface CheapSharkApi {
     fun searchDeals(@Query("title") query: String, @Query("pageNumber") pageNumber: Int): Call<List<Deal>>
     @GET
     fun getDealDetails(@Url url: String): Call<DealDetailsResponse>
+    @GET("stores")
+    fun getStores(): Call<List<Store>>
 }

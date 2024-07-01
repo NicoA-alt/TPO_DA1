@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="initial_slider_values">
+        <item>0.0</item>
+        <item>50.0</item>
+    </array>
+    <string-array name="sort_options">
+        <item>Precio</item>
+        <item>Descuento</item>
+    </string-array>
+    <string-array name="order_options">
+        <item>Ascendente</item>
+        <item>Descendente</item>
+    </string-array>
+</resources>

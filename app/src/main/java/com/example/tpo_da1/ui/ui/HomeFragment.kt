@@ -41,6 +41,13 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         setupSearch()
         observeViewModel()
+
+        binding.filterButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container, FilterFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun setupRecyclerView() {
