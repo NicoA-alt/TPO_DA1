@@ -27,6 +27,7 @@ class DealsViewModel : ViewModel() {
     private var ordenar: String = "price"
     private var lowerPrice: Int = 0
     private var upperPrice: Int = 50
+    private var selectedStoreID: Int = 0
 
     var currentPage = 0
     private var isLastPage = false
@@ -61,11 +62,11 @@ class DealsViewModel : ViewModel() {
         if (searchQuery.isNullOrEmpty()) {
             fetchDeals(++currentPage)
         } else {
-            searchDeals(searchQuery!!, ++currentPage,order)
+            searchDeals(searchQuery!!, ++currentPage,order,ordenar,lowerPrice,upperPrice,selectedStoreID)
         }
     }
 
-    fun searchDeals(query: String, page: Int = 0, desc: Int = 0, sortBy: String = "price", lowerPrice: Int = 0, upperPrice: Int = 50) {
+    fun searchDeals(query: String, page: Int, desc: Int, sortBy: String, lowerPrice: Int, upperPrice: Int, storeID: Int) {
         Log.d("DealsViewModel", "Searching deals with query: $query, page: $page, order: $desc, sort: $sortBy, lowerPrice: $lowerPrice, upperPrice: $upperPrice")
         if (_loading.value == true) return
 
@@ -76,12 +77,13 @@ class DealsViewModel : ViewModel() {
             ordenar = sortBy
             this.lowerPrice = lowerPrice
             this.upperPrice = upperPrice
+            selectedStoreID = storeID
             allDeals.clear()
         }
 
         viewModelScope.launch {
             try {
-                val searchResults = repository.searchDeals(query, page, desc, sortBy, lowerPrice, upperPrice)
+                val searchResults = repository.searchDeals(query, page, desc, sortBy, lowerPrice, upperPrice, storeID)
                 if (searchResults.size < pageSize) {
                     isLastPage = true
                 }

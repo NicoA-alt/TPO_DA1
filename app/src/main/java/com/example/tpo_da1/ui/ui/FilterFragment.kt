@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.SeekBar
 import androidx.lifecycle.ViewModelProvider
-import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.FragmentFilterBinding
 import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.Store
@@ -42,7 +39,6 @@ class FilterFragment : Fragment() {
 
         setupPriceRangeSlider()
         loadStores()
-        loadFilters()
 
         binding.applyFiltersButton.setOnClickListener {
             applyFilters()
@@ -83,6 +79,7 @@ class FilterFragment : Fragment() {
                         stores ?: emptyList()
                     )
                     binding.spinnerStore.adapter = adapter
+                    loadFilters()
                 }
             }
 
@@ -101,23 +98,26 @@ class FilterFragment : Fragment() {
         }
         val lowerPrice = binding.priceRangeSlider.values[0].toInt()
         val upperPrice = binding.priceRangeSlider.values[1].toInt()
-        Log.d("FilterFragment", "Applying filters with order: $order, sortBy: $sortBy")
+        val selectedStoreID = binding.spinnerStore.selectedItemId.toInt()
+        Log.d("FilterFragment", "Applying filters with order: $order, sortBy: $sortBy, lowerPrice: $lowerPrice, upperPrice: $upperPrice, storeID: $selectedStoreID")
         sharedViewModel.setOrder(order)
         sharedViewModel.setSortBy(sortBy)
         sharedViewModel.setLowerPrice(lowerPrice)
         sharedViewModel.setUpperPrice(upperPrice)
+        sharedViewModel.setSelectedStoreID(selectedStoreID)
 
-        saveFilters(order, sortBy, lowerPrice, upperPrice)
+        saveFilters(order, sortBy, lowerPrice, upperPrice, selectedStoreID)
         parentFragmentManager.popBackStack()
     }
 
-    private fun saveFilters(order: Int, sortBy: String, lowerPrice: Int, upperPrice: Int) {
+    private fun saveFilters(order: Int, sortBy: String, lowerPrice: Int, upperPrice: Int, storeID: Int) {
         val sharedPreferences = requireActivity().getSharedPreferences("FILTERS", Context.MODE_PRIVATE)
         with(sharedPreferences.edit()) {
             putInt("ORDER", order)
             putString("SORT_BY", sortBy)
             putInt("LOWER_PRICE", lowerPrice)
             putInt("UPPER_PRICE", upperPrice)
+            putInt("STORE_ID", storeID)
             apply()
         }
     }
@@ -128,6 +128,7 @@ class FilterFragment : Fragment() {
         val sortBy = sharedPreferences.getString("SORT_BY", "price") ?: "price"
         val lowerPrice = sharedPreferences.getInt("LOWER_PRICE", 0)
         val upperPrice = sharedPreferences.getInt("UPPER_PRICE", 50)
+        val storeID = sharedPreferences.getInt("STORE_ID", 0)
 
         Log.d("FilterFragment", "Loading filters with order: $order, sortBy: $sortBy, lowerPrice: $lowerPrice, upperPrice: $upperPrice")
 
@@ -140,6 +141,7 @@ class FilterFragment : Fragment() {
             }
         )
         binding.priceRangeSlider.values = listOf(lowerPrice.toFloat(), upperPrice.toFloat())
+        binding.spinnerStore.setSelection(storeID)
     }
 
     private fun resetFilters() {

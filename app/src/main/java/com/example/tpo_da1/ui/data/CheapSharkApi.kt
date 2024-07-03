@@ -23,6 +23,17 @@ interface CheapSharkApi {
         @Query("upperPrice") upperPrice: Int
     ): Call<List<Deal>>
 
+    @GET("deals")
+    fun searchDealsWithStoreID(
+        @Query("title") query: String,
+        @Query("pageNumber") pageNumber: Int,
+        @Query("desc") desc: Int,
+        @Query("sortBy") sortBy: String,
+        @Query("lowerPrice") lowerPrice: Int,
+        @Query("upperPrice") upperPrice: Int,
+        @Query("storeID") storeID: Int
+    ): Call<List<Deal>>
+
     @GET
     fun getDealDetails(@Url url: String): Call<DealDetailsResponse>
     @GET("stores")

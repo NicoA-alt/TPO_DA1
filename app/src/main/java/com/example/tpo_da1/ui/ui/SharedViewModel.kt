@@ -17,6 +17,9 @@ class SharedViewModel : ViewModel() {
     private val _upperPrice = MutableLiveData<Int>()
     val upperPrice: LiveData<Int> get() = _upperPrice
 
+    private val _storeID = MutableLiveData<Int>()
+    val storeID: LiveData<Int> get() = _storeID
+
     fun setOrder(order: Int) {
         _order.value = order
     }
@@ -29,5 +32,8 @@ class SharedViewModel : ViewModel() {
 
     fun setUpperPrice(upperPrice: Int) {
         _upperPrice.value = upperPrice
+    }
+    fun setSelectedStoreID(storeID: Int) {
+        _storeID.value = storeID
     }
 }

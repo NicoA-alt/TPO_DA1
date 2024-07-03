@@ -30,6 +30,7 @@ class HomeFragment : Fragment() {
     private var currentSortBy: String = "price"
     private var currentLowerPrice: Int = 0
     private var currentUpperPrice: Int = 50
+    private var currentStoreID: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,23 +46,27 @@ class HomeFragment : Fragment() {
         dealsViewModel = ViewModelProvider(this).get(DealsViewModel::class.java)
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
-        sharedViewModel.order.observe(viewLifecycleOwner, { order ->
+        sharedViewModel.order.observe(viewLifecycleOwner) { order ->
             currentOrder = order
             Log.d("HomeFragment", "Received order: $order")
-        })
-        sharedViewModel.sortBy.observe(viewLifecycleOwner, { sortBy ->
+        }
+        sharedViewModel.sortBy.observe(viewLifecycleOwner) { sortBy ->
             currentSortBy = sortBy
             Log.d("HomeFragment", "Received sortBy: $sortBy")
-        })
+        }
 
-        sharedViewModel.lowerPrice.observe(viewLifecycleOwner, { lowerPrice ->
+        sharedViewModel.lowerPrice.observe(viewLifecycleOwner) { lowerPrice ->
             currentLowerPrice = lowerPrice
             Log.d("HomeFragment", "Received lowerPrice: $lowerPrice")
-        })
-        sharedViewModel.upperPrice.observe(viewLifecycleOwner, { upperPrice ->
+        }
+        sharedViewModel.upperPrice.observe(viewLifecycleOwner) { upperPrice ->
             currentUpperPrice = upperPrice
             Log.d("HomeFragment", "Received upperPrice: $upperPrice")
-        })
+        }
+        sharedViewModel.storeID.observe(viewLifecycleOwner) { storeID ->
+            currentStoreID = storeID
+            Log.d("HomeFragment", "Received storeID: $storeID")
+        }
 
         setupRecyclerView()
         setupSearch()
@@ -124,10 +129,10 @@ class HomeFragment : Fragment() {
 
     private fun performSearch() {
         val query = binding.searchEditText.text.toString().trim()
-        Log.d("HomeFragment", "Performing search with query: $query, order: $currentOrder, sortBy: $currentSortBy, lowerPrice: $currentLowerPrice, upperPrice: $currentUpperPrice")
+        Log.d("HomeFragment", "Performing search with query: $query, order: $currentOrder, sortBy: $currentSortBy, lowerPrice: $currentLowerPrice, upperPrice: $currentUpperPrice,currentStoreID: $currentStoreID")
         if (query.isNotEmpty()) {
             dealsViewModel.currentPage = 0
-            dealsViewModel.searchDeals(query, 0, currentOrder, currentSortBy, currentLowerPrice, currentUpperPrice)
+            dealsViewModel.searchDeals(query, 0, currentOrder, currentSortBy, currentLowerPrice, currentUpperPrice,currentStoreID)
         }
     }
 
