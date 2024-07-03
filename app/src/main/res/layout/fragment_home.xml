@@ -44,7 +44,7 @@
                 android:id="@+id/filterButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/filtro4"
+                android:src="@drawable/filtro"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_marginStart="8dp"
                 android:padding="8dp"
@@ -95,8 +95,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
-        android:background="#424242"
-        android:backgroundTint="@color/white"
+        android:background="@android:color/transparent"
         android:indeterminate="true"
         android:indeterminateTint="@color/primario"
         android:visibility="gone" />

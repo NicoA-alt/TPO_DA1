@@ -1,3 +1,5 @@
+package com.example.tpo_da1.ui.data.filter
+
 import com.example.tpo_da1.ui.data.CheapSharkApi
 import com.example.tpo_da1.ui.domain.Store
 import retrofit2.awaitResponse

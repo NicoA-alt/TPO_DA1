@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.filter
 
 import android.content.Context
 import android.view.LayoutInflater

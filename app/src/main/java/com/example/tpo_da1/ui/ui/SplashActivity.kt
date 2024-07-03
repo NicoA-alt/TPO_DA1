@@ -8,7 +8,7 @@ import com.example.tpo_da1.R
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
-    private val TimeOut: Long = 2000
+    private val timeOut: Long = 2000
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +27,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             finish()
-        }, TimeOut)
+        }, timeOut)
     }
 }

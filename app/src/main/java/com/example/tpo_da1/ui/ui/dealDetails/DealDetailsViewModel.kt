@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.dealDetails
 
 import android.app.Application
 import android.util.Log
@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tpo_da1.ui.data.DealDetails.DealDetailsRepository
-import com.example.tpo_da1.ui.data.DealDetails.DealDetailsService
+import com.example.tpo_da1.ui.data.dealDetails.DealDetailsRepository
+import com.example.tpo_da1.ui.data.dealDetails.DealDetailsService
 import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.CheapestPrice
 import com.example.tpo_da1.ui.domain.DealDetails

@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui.data.DealDetails
+package com.example.tpo_da1.ui.data.dealDetails
 
 import android.content.Context
 import android.util.Log
@@ -7,7 +7,6 @@ import com.example.tpo_da1.ui.data.dbLocal.AppDatabase
 import com.example.tpo_da1.ui.data.dbLocal.DealDetailsEntity
 import com.example.tpo_da1.ui.domain.DealDetails
 import com.example.tpo_da1.ui.domain.DealDetailsResponse
-import com.google.android.gms.common.api.ApiException
 import retrofit2.awaitResponse
 
 class DealDetailsService(private val api: CheapSharkApi, context: Context) {

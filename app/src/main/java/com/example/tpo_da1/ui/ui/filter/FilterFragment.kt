@@ -1,8 +1,6 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.filter
 
-import FilterService
-import FilterViewModel
-import android.content.Context
+import com.example.tpo_da1.ui.data.filter.FilterService
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,17 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.tpo_da1.databinding.FragmentFilterBinding
-import com.example.tpo_da1.ui.data.FilterRepository
+import com.example.tpo_da1.ui.data.filter.FilterRepository
 import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.FilterSettings
-import com.example.tpo_da1.ui.domain.Store
-import com.example.tpo_da1.ui.domain.StoreImages
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
+import com.example.tpo_da1.ui.ui.SharedViewModel
 
 
 class FilterFragment : Fragment() {

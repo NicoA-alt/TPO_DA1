@@ -1,6 +1,5 @@
-package com.example.tpo_da1.ui.data
+package com.example.tpo_da1.ui.data.filter
 
-import FilterService
 import android.content.Context
 import android.util.Log
 import com.example.tpo_da1.ui.domain.FilterSettings

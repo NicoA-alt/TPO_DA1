@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.deals
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tpo_da1.ui.data.CheapSharkApi
-import com.example.tpo_da1.ui.data.Deal.DealsRepository
-import com.example.tpo_da1.ui.data.Deal.DealsService
+import com.example.tpo_da1.ui.data.deal.DealsRepository
+import com.example.tpo_da1.ui.data.deal.DealsService
 import com.example.tpo_da1.ui.data.RetrofitHelper
 import com.example.tpo_da1.ui.domain.Deal
 import kotlinx.coroutines.launch
@@ -38,7 +38,7 @@ class DealsViewModel : ViewModel() {
         fetchDeals(currentPage)
     }
 
-    fun fetchDeals(page: Int) {
+    private fun fetchDeals(page: Int) {
         if (_loading.value == true || isLastPage) return
 
         _loading.value = true
@@ -51,7 +51,7 @@ class DealsViewModel : ViewModel() {
                 allDeals.addAll(newDeals)
                 _deals.value = groupDealsByTitle(allDeals)
             } catch (e: Exception) {
-                // Manejar errores
+                Log.e("DealsViewModel", "Error fetching deals", e)
             } finally {
                 _loading.value = false
             }
@@ -90,7 +90,7 @@ class DealsViewModel : ViewModel() {
                 allDeals.addAll(searchResults)
                 _deals.value = groupDealsByTitle(allDeals)
             } catch (e: Exception) {
-                // Manejar errores
+                Log.e("DealsViewModel", "Error searching deals", e)
             } finally {
                 _loading.value = false
             }

@@ -1,17 +1,14 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.deals
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.tpo_da1.R
-import com.example.tpo_da1.databinding.ItemFavoriteBinding
+import com.example.tpo_da1.databinding.ItemDealBinding
 import com.example.tpo_da1.ui.domain.Deal
 import kotlin.math.roundToInt
 
-class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(deal: Deal, clickListener: (String) -> Unit) {
+class DealViewHolder(private val binding: ItemDealBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(deal: Deal, clickListener: (Deal) -> Unit) {
         binding.title.text = deal.title
         binding.normalPrice.text = "$${deal.normalPrice}"
         binding.salePrice.text = "$${deal.salePrice}"
@@ -25,6 +22,6 @@ class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerVie
         val discountPercentage = ((normalPrice - salePrice) / normalPrice * 100).roundToInt()
         binding.discountPercentage.text = "$discountPercentage%"
 
-        binding.root.setOnClickListener { clickListener(deal.dealID) }
+        binding.root.setOnClickListener { clickListener(deal) }
     }
 }

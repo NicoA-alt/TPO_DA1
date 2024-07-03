@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.deals
 
 import android.view.LayoutInflater
 import android.view.View

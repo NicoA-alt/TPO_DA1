@@ -1,8 +1,10 @@
+package com.example.tpo_da1.ui.ui.filter
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tpo_da1.ui.data.FilterRepository
+import com.example.tpo_da1.ui.data.filter.FilterRepository
 import com.example.tpo_da1.ui.domain.FilterSettings
 import com.example.tpo_da1.ui.domain.Store
 import kotlinx.coroutines.launch

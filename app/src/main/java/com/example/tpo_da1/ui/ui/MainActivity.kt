@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.ActivityMainBinding
+import com.example.tpo_da1.ui.ui.deals.HomeFragment
+import com.example.tpo_da1.ui.ui.favorite.FavoritosFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth

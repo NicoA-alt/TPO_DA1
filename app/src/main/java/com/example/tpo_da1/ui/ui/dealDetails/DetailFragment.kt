@@ -1,5 +1,6 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.dealDetails
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -34,7 +35,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dealDetailsViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).get(DealDetailsViewModel::class.java)
+        dealDetailsViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[DealDetailsViewModel::class.java]
 
         arguments?.let {
             dealID = it.getString("dealID").orEmpty()
@@ -45,6 +46,7 @@ class DetailFragment : Fragment() {
         setButtonListeners()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observeViewModel() {
         dealDetailsViewModel.dealDetails.observe(viewLifecycleOwner) { deal ->
             deal?.let {
@@ -53,7 +55,7 @@ class DetailFragment : Fragment() {
                 binding.steamRatingLabel.text = "Calificación en Steam: "
                 binding.steamRatingText.text = "${it.steamRatingText ?: "N/A"} (${it.steamRatingPercent ?: "N/A"}%)"
                 binding.metacriticRatingLabel.text = "Calificación en Metacritic: "
-                binding.metacriticRatingText.text = "${it.metacriticScore ?: "N/A"}"
+                binding.metacriticRatingText.text = it.metacriticScore ?: "N/A"
 
                 binding.salePriceText.text = "Precio de venta: "
                 binding.salePrice.text = "$${it.salePrice ?: "N/A"}"

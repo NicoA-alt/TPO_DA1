@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.favorite
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.FragmentFavoritosBinding
+import com.example.tpo_da1.ui.ui.dealDetails.DetailFragment
 
 
 class FavoritosFragment : Fragment() {

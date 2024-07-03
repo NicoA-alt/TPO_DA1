@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Dropdown para selección de tienda -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Slider para rango de precios -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +58,6 @@
                 android:textColor="@color/textoSecundario"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Dropdown para criterios de ordenamiento -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,7 +72,6 @@
                 android:layout_marginBottom="16dp"
                 android:entries="@array/sort_options"/>
 
-            <!-- Dropdown para orden ascendente o descendente -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,7 +89,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Botones en línea, anclados en la parte inferior -->
     <LinearLayout
         android:id="@+id/buttons_layout"
         android:layout_width="0dp"

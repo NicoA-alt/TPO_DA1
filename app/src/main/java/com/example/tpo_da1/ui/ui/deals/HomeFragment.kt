@@ -1,4 +1,4 @@
-package com.example.tpo_da1.ui.ui
+package com.example.tpo_da1.ui.ui.deals
 
 import android.os.Bundle
 import android.os.Handler
@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.FragmentHomeBinding
+import com.example.tpo_da1.ui.ui.dealDetails.DetailFragment
+import com.example.tpo_da1.ui.ui.filter.FilterFragment
+import com.example.tpo_da1.ui.ui.SharedViewModel
 
 class HomeFragment : Fragment() {
 
@@ -43,8 +46,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dealsViewModel = ViewModelProvider(this).get(DealsViewModel::class.java)
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        dealsViewModel = ViewModelProvider(this)[DealsViewModel::class.java]
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
         sharedViewModel.order.observe(viewLifecycleOwner) { order ->
             currentOrder = order

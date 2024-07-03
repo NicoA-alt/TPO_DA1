@@ -5,7 +5,6 @@ import com.example.tpo_da1.ui.domain.DealDetailsResponse
 import com.example.tpo_da1.ui.domain.Store
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
