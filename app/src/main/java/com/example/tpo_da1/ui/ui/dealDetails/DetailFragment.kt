@@ -52,9 +52,9 @@ class DetailFragment : Fragment() {
             deal?.let {
                 Log.d("DetailFragment", "Deal details observed: $deal")
                 binding.title.text = it.name ?: "N/A"
-                binding.steamRatingLabel.text = "Calificación en Steam: "
+                binding.steamRatingLabel.text = "Calificación Steam: "
                 binding.steamRatingText.text = "${it.steamRatingText ?: "N/A"} (${it.steamRatingPercent ?: "N/A"}%)"
-                binding.metacriticRatingLabel.text = "Calificación en Metacritic: "
+                binding.metacriticRatingLabel.text = "Calificación Metacritic: "
                 binding.metacriticRatingText.text = it.metacriticScore ?: "N/A"
 
                 binding.salePriceText.text = "Precio de venta: "
@@ -66,6 +66,7 @@ class DetailFragment : Fragment() {
                 Glide.with(binding.root.context)
                     .load(it.thumb)
                     .into(binding.dealImage)
+                showNoStoresPlaceholder(true)
             } ?: run {
                 Log.d("DetailFragment", "Deal details are null")
                 binding.title.text = "N/A"
@@ -83,6 +84,7 @@ class DetailFragment : Fragment() {
                 Glide.with(binding.root.context)
                     .load(R.drawable.ic_launcher_background) // Placeholder
                     .into(binding.dealImage)
+                showNoStoresPlaceholder(true)
             }
         }
 
@@ -176,7 +178,15 @@ class DetailFragment : Fragment() {
             binding.favoriteButton.setImageResource(iconRes)
         }
     }
-
+    private fun showNoStoresPlaceholder(show: Boolean) {
+        if (show) {
+            binding.noStoresPlaceholder.visibility = View.VISIBLE
+            binding.otherStoresRecyclerView.visibility = View.GONE
+        } else {
+            binding.noStoresPlaceholder.visibility = View.GONE
+            binding.otherStoresRecyclerView.visibility = View.VISIBLE
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

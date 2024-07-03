@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,7 +38,9 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Calificación en Steam: "
+                    android:text="Calificación Steam: "
+                    android:textStyle="bold"
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
 
                 <TextView
@@ -49,6 +50,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="N/A (0%)"
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
             </LinearLayout>
 
@@ -62,7 +64,9 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Calificación en Metacritic: "
+                    android:textStyle="bold"
+                    android:text="Calificación Metacritic:"
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
 
                 <TextView
@@ -72,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="N/A"
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
             </LinearLayout>
 
@@ -85,7 +90,9 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="Precio de venta: "
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
 
                 <TextView
@@ -95,6 +102,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="$N/A"
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
             </LinearLayout>
 
@@ -108,7 +116,9 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="Precio original: "
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
 
                 <TextView
@@ -118,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="$N/A"
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
             </LinearLayout>
 
@@ -131,7 +142,9 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="Precio más bajo: "
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
 
                 <TextView
@@ -141,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="$N/A"
+                    android:textSize="16sp"
                     android:paddingTop="8dp" />
             </LinearLayout>
 
@@ -156,14 +170,15 @@
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/boton"
-                    android:text="Comprar" />
+                    android:text="Comprar"
+                    android:textSize="16sp" />
 
                 <ImageButton
                     android:id="@+id/favoriteButton"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/bookmark1"
+                    android:src="@drawable/bookmark"
                     android:contentDescription="Favorito"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="4dp" />
@@ -173,7 +188,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/info1"
+                    android:src="@drawable/info"
                     android:contentDescription="Info"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="4dp" />
@@ -183,18 +198,20 @@
                 android:id="@+id/otherStoresTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Otras Tiendas"
+                android:text="Tiendas con mejor oferta:"
                 android:paddingTop="16dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/noStoresPlaceholder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:paddingTop="16dp"
                 android:visibility="gone"
-                android:text="¡No hay más tiendas que ofrecer en este momento, pero sigamos buscando la mejor oferta juntos!" />
-
+                android:gravity="center"
+                android:text="¡No hay otras tiendas con mejores ofertas disponibles en este momento!"
+                android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/otherStoresRecyclerView"

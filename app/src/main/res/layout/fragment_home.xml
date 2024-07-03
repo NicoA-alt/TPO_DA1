@@ -37,7 +37,7 @@
                 android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
-                android:src="@drawable/busqueda1"
+                android:src="@drawable/busqueda"
                 app:tint="@color/primario" />
 
             <ImageButton
