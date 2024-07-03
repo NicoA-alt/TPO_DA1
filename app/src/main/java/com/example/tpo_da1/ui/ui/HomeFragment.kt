@@ -3,6 +3,7 @@ package com.example.tpo_da1.ui.ui
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +25,11 @@ class HomeFragment : Fragment() {
     private var isLoading = false
     private val loadMoreHandler = Handler(Looper.getMainLooper())
     private val loadMoreRunnable = Runnable { dealsViewModel.loadMoreDeals() }
+    private lateinit var sharedViewModel: SharedViewModel
+    private var currentOrder: Int = 0
+    private var currentSortBy: String = "price"
+    private var currentLowerPrice: Int = 0
+    private var currentUpperPrice: Int = 50
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +43,25 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         dealsViewModel = ViewModelProvider(this).get(DealsViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
+        sharedViewModel.order.observe(viewLifecycleOwner, { order ->
+            currentOrder = order
+            Log.d("HomeFragment", "Received order: $order")
+        })
+        sharedViewModel.sortBy.observe(viewLifecycleOwner, { sortBy ->
+            currentSortBy = sortBy
+            Log.d("HomeFragment", "Received sortBy: $sortBy")
+        })
+
+        sharedViewModel.lowerPrice.observe(viewLifecycleOwner, { lowerPrice ->
+            currentLowerPrice = lowerPrice
+            Log.d("HomeFragment", "Received lowerPrice: $lowerPrice")
+        })
+        sharedViewModel.upperPrice.observe(viewLifecycleOwner, { upperPrice ->
+            currentUpperPrice = upperPrice
+            Log.d("HomeFragment", "Received upperPrice: $upperPrice")
+        })
 
         setupRecyclerView()
         setupSearch()
@@ -99,9 +124,10 @@ class HomeFragment : Fragment() {
 
     private fun performSearch() {
         val query = binding.searchEditText.text.toString().trim()
+        Log.d("HomeFragment", "Performing search with query: $query, order: $currentOrder, sortBy: $currentSortBy, lowerPrice: $currentLowerPrice, upperPrice: $currentUpperPrice")
         if (query.isNotEmpty()) {
             dealsViewModel.currentPage = 0
-            dealsViewModel.searchDeals(query)
+            dealsViewModel.searchDeals(query, 0, currentOrder, currentSortBy, currentLowerPrice, currentUpperPrice)
         }
     }
 

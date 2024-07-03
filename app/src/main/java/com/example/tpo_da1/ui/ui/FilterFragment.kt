@@ -1,12 +1,15 @@
 package com.example.tpo_da1.ui.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
+import androidx.lifecycle.ViewModelProvider
 import com.example.tpo_da1.R
 import com.example.tpo_da1.databinding.FragmentFilterBinding
 import com.example.tpo_da1.ui.data.RetrofitHelper
@@ -21,12 +24,16 @@ class FilterFragment : Fragment() {
 
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
+    private lateinit var sharedViewModel: SharedViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFilterBinding.inflate(inflater, container, false)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
         return binding.root
     }
 
@@ -35,6 +42,7 @@ class FilterFragment : Fragment() {
 
         setupPriceRangeSlider()
         loadStores()
+        loadFilters()
 
         binding.applyFiltersButton.setOnClickListener {
             applyFilters()
@@ -42,6 +50,9 @@ class FilterFragment : Fragment() {
 
         binding.resetFiltersButton.setOnClickListener {
             resetFilters()
+        }
+        binding.cancelButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
         }
     }
 
@@ -82,7 +93,53 @@ class FilterFragment : Fragment() {
     }
 
     private fun applyFilters() {
-        // Aquí deberías obtener los valores de los filtros y aplicar la lógica para filtrar las ofertas
+        val order = if (binding.orderSpinner.selectedItemPosition == 0) 0 else 1 // 0: ascendente, 1: descendente
+        val sortBy = when (binding.sortSpinner.selectedItemPosition) {
+            0 -> "price"
+            1 -> "savings"
+            else -> "price"
+        }
+        val lowerPrice = binding.priceRangeSlider.values[0].toInt()
+        val upperPrice = binding.priceRangeSlider.values[1].toInt()
+        Log.d("FilterFragment", "Applying filters with order: $order, sortBy: $sortBy")
+        sharedViewModel.setOrder(order)
+        sharedViewModel.setSortBy(sortBy)
+        sharedViewModel.setLowerPrice(lowerPrice)
+        sharedViewModel.setUpperPrice(upperPrice)
+
+        saveFilters(order, sortBy, lowerPrice, upperPrice)
+        parentFragmentManager.popBackStack()
+    }
+
+    private fun saveFilters(order: Int, sortBy: String, lowerPrice: Int, upperPrice: Int) {
+        val sharedPreferences = requireActivity().getSharedPreferences("FILTERS", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putInt("ORDER", order)
+            putString("SORT_BY", sortBy)
+            putInt("LOWER_PRICE", lowerPrice)
+            putInt("UPPER_PRICE", upperPrice)
+            apply()
+        }
+    }
+
+    private fun loadFilters() {
+        val sharedPreferences = requireActivity().getSharedPreferences("FILTERS", Context.MODE_PRIVATE)
+        val order = sharedPreferences.getInt("ORDER", 0)
+        val sortBy = sharedPreferences.getString("SORT_BY", "price") ?: "price"
+        val lowerPrice = sharedPreferences.getInt("LOWER_PRICE", 0)
+        val upperPrice = sharedPreferences.getInt("UPPER_PRICE", 50)
+
+        Log.d("FilterFragment", "Loading filters with order: $order, sortBy: $sortBy, lowerPrice: $lowerPrice, upperPrice: $upperPrice")
+
+        binding.orderSpinner.setSelection(order)
+        binding.sortSpinner.setSelection(
+            when (sortBy) {
+                "price" -> 0
+                "savings" -> 1
+                else -> 0
+            }
+        )
+        binding.priceRangeSlider.values = listOf(lowerPrice.toFloat(), upperPrice.toFloat())
     }
 
     private fun resetFilters() {
@@ -90,7 +147,6 @@ class FilterFragment : Fragment() {
         binding.priceRangeSlider.values = listOf(0f, 50f)
         binding.sortSpinner.setSelection(0)
         binding.orderSpinner.setSelection(0)
-        binding.checkboxOnSale.isChecked = false
     }
 
     override fun onDestroyView() {

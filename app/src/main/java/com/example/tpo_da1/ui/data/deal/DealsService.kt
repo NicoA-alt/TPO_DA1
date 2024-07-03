@@ -14,8 +14,8 @@ class DealsService(private val api: CheapSharkApi) {
         }
     }
 
-    suspend fun searchDeals(query: String, page: Int): List<Deal> {
-        val response = api.searchDeals(query, page).awaitResponse()
+    suspend fun searchDeals(query: String, page: Int, desc: Int, sortBy: String, lowerPrice: Int, upperPrice: Int): List<Deal> {
+        val response = api.searchDeals(query, page, desc, sortBy, lowerPrice, upperPrice).awaitResponse()
         if (response.isSuccessful) {
             return response.body() ?: throw Exception("No deals found")
         } else {

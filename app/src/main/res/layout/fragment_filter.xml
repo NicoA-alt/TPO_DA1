@@ -90,15 +90,6 @@
                 android:layout_marginBottom="16dp"
                 android:entries="@array/order_options"/>
 
-            <!-- Checkbox para ofertas disponibles -->
-            <CheckBox
-                android:id="@+id/checkbox_on_sale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="En oferta"
-                android:textColor="@color/textoPrimario"
-                android:layout_marginBottom="16dp"/>
-
         </LinearLayout>
     </ScrollView>
 
@@ -114,25 +105,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
 
-        <Button
-            android:id="@+id/apply_filters_button"
+        <ImageButton
+            android:id="@+id/reset_filters_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Aplicar filtros"
+            android:background="@null"
+            android:src="@drawable/reset"
+            android:contentDescription="@string/reset_filters"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar"
             android:backgroundTint="@color/boton"
             android:textColor="@color/botonTexto"
             android:layout_marginEnd="8dp"/>
 
         <Button
-            android:id="@+id/reset_filters_button"
+            android:id="@+id/apply_filters_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Resetear filtros"
+            android:text="Aplicar"
             android:backgroundTint="@color/boton"
             android:textColor="@color/botonTexto"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginEnd="8dp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

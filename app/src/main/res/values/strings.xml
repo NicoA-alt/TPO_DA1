@@ -9,4 +9,5 @@
     <string name="cerrar_sesion">Cerrar Sesion</string>
     <string name="no_results_text">No encontramos resultados para tu búsqueda. Por favor, intenta con otros términos.</string>
     <string name="no_results_icon">Icono de no resultados</string>
+    <string name="reset_filters">Restablecer filtros</string>
 </resources>

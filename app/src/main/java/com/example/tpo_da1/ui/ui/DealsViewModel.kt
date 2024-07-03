@@ -1,5 +1,6 @@
 package com.example.tpo_da1.ui.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,10 @@ class DealsViewModel : ViewModel() {
     val loading: LiveData<Boolean> get() = _loading
 
     private var searchQuery: String? = null
+    private var order: Int = 0
+    private var ordenar: String = "price"
+    private var lowerPrice: Int = 0
+    private var upperPrice: Int = 50
 
     var currentPage = 0
     private var isLastPage = false
@@ -56,22 +61,27 @@ class DealsViewModel : ViewModel() {
         if (searchQuery.isNullOrEmpty()) {
             fetchDeals(++currentPage)
         } else {
-            searchDeals(searchQuery!!, ++currentPage)
+            searchDeals(searchQuery!!, ++currentPage,order)
         }
     }
 
-    fun searchDeals(query: String, page: Int = 0) {
+    fun searchDeals(query: String, page: Int = 0, desc: Int = 0, sortBy: String = "price", lowerPrice: Int = 0, upperPrice: Int = 50) {
+        Log.d("DealsViewModel", "Searching deals with query: $query, page: $page, order: $desc, sort: $sortBy, lowerPrice: $lowerPrice, upperPrice: $upperPrice")
         if (_loading.value == true) return
 
         _loading.value = true
         if (page == 0) {
             searchQuery = query
+            order = desc
+            ordenar = sortBy
+            this.lowerPrice = lowerPrice
+            this.upperPrice = upperPrice
             allDeals.clear()
         }
 
         viewModelScope.launch {
             try {
-                val searchResults = repository.searchDeals(query, page)
+                val searchResults = repository.searchDeals(query, page, desc, sortBy, lowerPrice, upperPrice)
                 if (searchResults.size < pageSize) {
                     isLastPage = true
                 }

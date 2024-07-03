@@ -6,7 +6,7 @@ class DealsRepository(private val service: DealsService) {
         return service.getDeals(page, pageSize)
     }
 
-    suspend fun searchDeals(query: String, page: Int): List<Deal> {
-        return service.searchDeals(query, page)
+    suspend fun searchDeals(query: String, page: Int, desc: Int, sortBy: String, lowerPrice: Int, upperPrice: Int): List<Deal> {
+        return service.searchDeals(query, page, desc, sortBy, lowerPrice, upperPrice)
     }
 }
