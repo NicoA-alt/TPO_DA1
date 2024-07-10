@@ -1,5 +1,6 @@
 package com.example.tpo_da1.ui.ui.deals
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,24 +53,19 @@ class HomeFragment : Fragment() {
 
         sharedViewModel.order.observe(viewLifecycleOwner) { order ->
             currentOrder = order
-            Log.d("HomeFragment", "Received order: $order")
         }
         sharedViewModel.sortBy.observe(viewLifecycleOwner) { sortBy ->
             currentSortBy = sortBy
-            Log.d("HomeFragment", "Received sortBy: $sortBy")
         }
 
         sharedViewModel.lowerPrice.observe(viewLifecycleOwner) { lowerPrice ->
             currentLowerPrice = lowerPrice
-            Log.d("HomeFragment", "Received lowerPrice: $lowerPrice")
         }
         sharedViewModel.upperPrice.observe(viewLifecycleOwner) { upperPrice ->
             currentUpperPrice = upperPrice
-            Log.d("HomeFragment", "Received upperPrice: $upperPrice")
         }
         sharedViewModel.storeID.observe(viewLifecycleOwner) { storeID ->
             currentStoreID = storeID
-            Log.d("HomeFragment", "Received storeID: $storeID")
         }
 
         setupRecyclerView()
@@ -132,10 +129,11 @@ class HomeFragment : Fragment() {
 
     private fun performSearch() {
         val query = binding.searchEditText.text.toString().trim()
-        Log.d("HomeFragment", "Performing search with query: $query, order: $currentOrder, sortBy: $currentSortBy, lowerPrice: $currentLowerPrice, upperPrice: $currentUpperPrice,currentStoreID: $currentStoreID")
         if (query.isNotEmpty()) {
             dealsViewModel.currentPage = 0
             dealsViewModel.searchDeals(query, 0, currentOrder, currentSortBy, currentLowerPrice, currentUpperPrice,currentStoreID)
+            val inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
         }
     }
 

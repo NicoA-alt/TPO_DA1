@@ -67,7 +67,6 @@ class DealsViewModel : ViewModel() {
     }
 
     fun searchDeals(query: String, page: Int, desc: Int, sortBy: String, lowerPrice: Int, upperPrice: Int, storeID: Int) {
-        Log.d("DealsViewModel", "Searching deals with query: $query, page: $page, order: $desc, sort: $sortBy, lowerPrice: $lowerPrice, upperPrice: $upperPrice")
         if (_loading.value == true) return
 
         _loading.value = true

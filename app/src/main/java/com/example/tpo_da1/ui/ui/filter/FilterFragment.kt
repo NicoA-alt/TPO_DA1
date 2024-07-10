@@ -52,6 +52,7 @@ class FilterFragment : Fragment() {
                 when (filters.sortBy) {
                     "price" -> 0
                     "savings" -> 1
+                    "release" -> 2
                     else -> 0
                 }
             )
@@ -84,6 +85,7 @@ class FilterFragment : Fragment() {
         val sortBy = when (binding.sortSpinner.selectedItemPosition) {
             0 -> "price"
             1 -> "savings"
+            2 -> "release"
             else -> "price"
         }
         val lowerPrice = binding.priceRangeSlider.values[0].toInt()

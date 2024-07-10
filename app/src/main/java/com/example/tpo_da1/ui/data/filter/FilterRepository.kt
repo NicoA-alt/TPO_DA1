@@ -1,7 +1,6 @@
 package com.example.tpo_da1.ui.data.filter
 
 import android.content.Context
-import android.util.Log
 import com.example.tpo_da1.ui.domain.FilterSettings
 import com.example.tpo_da1.ui.domain.Store
 import com.example.tpo_da1.ui.domain.StoreImages
@@ -16,15 +15,13 @@ class FilterRepository(private val service: FilterService, private val context: 
 
     fun loadFilters(): FilterSettings {
         val sharedPreferences = context.getSharedPreferences("FILTERS", Context.MODE_PRIVATE)
-        val filterSettings = FilterSettings(
+        return FilterSettings(
             order = sharedPreferences.getInt("ORDER", 0),
             sortBy = sharedPreferences.getString("SORT_BY", "price") ?: "price",
             lowerPrice = sharedPreferences.getInt("LOWER_PRICE", 0),
             upperPrice = sharedPreferences.getInt("UPPER_PRICE", 50),
             storeID = sharedPreferences.getInt("STORE_ID", 0)
         )
-        Log.d("FilterRepository", "Loaded filters: $filterSettings")
-        return filterSettings
     }
 
     fun saveFilters(filterSettings: FilterSettings) {
@@ -35,7 +32,6 @@ class FilterRepository(private val service: FilterService, private val context: 
             putInt("LOWER_PRICE", filterSettings.lowerPrice)
             putInt("UPPER_PRICE", filterSettings.upperPrice)
             putInt("STORE_ID", filterSettings.storeID)
-            Log.d("FilterRepository", "Saved filters: $filterSettings")
             apply()
         }
     }

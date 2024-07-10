@@ -7,6 +7,7 @@
     <string-array name="sort_options">
         <item>Precio</item>
         <item>Descuento</item>
+        <item>Fecha de publicacion</item>
     </string-array>
     <string-array name="order_options">
         <item>Ascendente</item>

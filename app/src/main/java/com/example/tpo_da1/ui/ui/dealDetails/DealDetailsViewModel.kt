@@ -1,7 +1,6 @@
 package com.example.tpo_da1.ui.ui.dealDetails
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -32,11 +31,9 @@ class DealDetailsViewModel(application: Application) : AndroidViewModel(applicat
                 val response = repository.getDealDetails(dealID)
                 _dealDetails.value = response.gameInfo
                 _cheapestPrice.value = response.cheapestPrice
-                Log.d("DealDetailsViewModel", "Deal details fetched: ${response.gameInfo}")
             } catch (e: Exception) {
                 _dealDetails.value = null
                 _cheapestPrice.value = null
-                Log.e("DealDetailsViewModel", "Error fetching deal details: ${e.message}")
             }
             _loading.value = false
         }

@@ -1,7 +1,6 @@
 package com.example.tpo_da1.ui.data.dealDetails
 
 import android.content.Context
-import android.util.Log
 import com.example.tpo_da1.ui.data.CheapSharkApi
 import com.example.tpo_da1.ui.data.dbLocal.AppDatabase
 import com.example.tpo_da1.ui.data.dbLocal.DealDetailsEntity
@@ -26,13 +25,10 @@ class DealDetailsService(private val api: CheapSharkApi, context: Context) {
                 thumb = dealDetailsResponse.gameInfo?.thumb
             )
             dealDetailsDao.insertDealDetails(dealDetailsEntity)
-            Log.d("DealDetailsService", "Deal details inserted into database: $dealDetailsEntity")
             dealDetailsResponse
         } catch (e: Exception) {
-            Log.e("DealDetailsService", "Error fetching deal details from API: ${e.message}")
             val cachedDealDetails = dealDetailsDao.getDealDetails(dealID)
             if (cachedDealDetails != null) {
-                Log.d("DealDetailsService", "Using cached deal details: $cachedDealDetails")
                 DealDetailsResponse(
                     gameInfo = DealDetails(
                         storeID = null,
